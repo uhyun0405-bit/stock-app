@@ -48,7 +48,7 @@ async function fetchStockData(row) {
   currentPriceBox.innerText = '검색중...';
 
   try {
-    const response = await fetch(`http://localhost:3000/api/price/${fetchTicker}`);
+    const response = await fetch(`https://stock-app-2tyk.onrender.com/api/price/${fetchTicker}`);
     if (!response.ok) throw new Error('API 오류');
     const data = await response.json();
 
