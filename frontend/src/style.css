@@ -294,3 +294,37 @@ code {
     border-right-color: var(--border);
   }
 }
+/* 입력창 글자 크기를 키우고 여백을 줘서 꽉 차 보이게 만듭니다 */
+.ticker-input, .price-input {
+  font-size: 16px;       /* 글씨 크기 큼직하게 */
+  padding: 8px;          /* 안쪽 여백 추가 */
+  width: 90%;            /* 상자 넓이 맞춤 */
+  text-align: center;    /* 가운데 정렬 */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* 조회와 삭제 버튼을 깔끔하게 위아래로 배치합니다 */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* 새로 만든 삭제 버튼의 빨간색 디자인 */
+.delete-btn {
+  background-color: #ff4d4f; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 삭제 버튼 마우스 올렸을 때 효과 */
+.delete-btn:hover {
+  background-color: #ff7875;
+}
