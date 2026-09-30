@@ -44,9 +44,13 @@ async function fetchStockData(row) {
   currentPriceBox.innerText = '검색중...';
 
  try {
-    // Vercel 내부 서버리스 통로로 직접 요청합니다.
     const response = await fetch(`/api/price?ticker=${fetchTicker}`);
-    if (!response.ok) throw new Error('API 오류');
+    
+    // 만약 서버에서 에러를 보냈다면 그 이유를 상세히 뽑아냅니다.
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`서버응답 ${response.status} - ${errorData.error || '알수없는오류'}`);
+    }
     
     const data = await response.json();
     const currentPrice = data.price;
@@ -64,8 +68,9 @@ async function fetchStockData(row) {
   } catch (error) {
     console.error(error);
     currentPriceBox.innerText = '오류';
-    alert('데이터를 불러오지 못했습니다. 종목 코드를 다시 확인해주세요.');
+    // 폰 화면에 진짜 에러 원인을 띄워줍니다!
+    alert(`[폰 에러 상세정보]\n입력된 코드: ${fetchTicker}\n에러 원인: ${error.message}`);
   }
-
+}
 addStockRow();
 addBtn.addEventListener('click', addStockRow);
