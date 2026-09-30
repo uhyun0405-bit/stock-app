@@ -47,7 +47,8 @@ async function fetchStockData(row) {
 
   currentPriceBox.innerText = '검색중...';
 
-  try {
+try {
+    // 렌더 주소가 아니라 꼭 아래처럼 짧은 주소여야 합니다! (백틱 기호 사용)
     const response = await fetch(`/api/price?ticker=${fetchTicker}`);
     if (!response.ok) throw new Error('API 오류');
     const data = await response.json();
