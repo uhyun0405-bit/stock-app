@@ -25,7 +25,8 @@ function addStockRow() {
 }
 
 async function fetchStockData(row) {
-  const tickerInput = row.querySelector('.ticker-input').value.trim();
+  // 숫자, 영어 알파벳, 마침표(.)를 제외한 모든 투명 공백과 특수기호를 강제로 삭제합니다.
+  const tickerInput = row.querySelector('.ticker-input').value.replace(/[^0-9a-zA-Z.]/g, '');
   const basePrice = parseFloat(row.querySelector('.price-input').value);
   const currentPriceBox = row.querySelector('.current-price');
   const diffResultBox = row.querySelector('.diff-result');
