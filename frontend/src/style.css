@@ -294,8 +294,8 @@ code {
     border-right-color: var(--border);
   }
 }
-/* 입력창 글자 크기 큼직하게 및 디자인 정리 */
-.name-input, .ticker-input, .price-input {
+/* 종목명 입력창: 아래쪽에 여백(margin-bottom)을 주어 코드 칸과 확실하게 떨어지게 만듭니다 */
+.name-input {
   font-size: 16px;
   padding: 8px;
   width: 90%;
@@ -303,34 +303,44 @@ code {
   border-radius: 5px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  margin-bottom: 5px; /* 입력창 위아래 간격 띄우기 */
-}
-
-/* 종목명 칸은 약간 회색으로 칠해서 구분이 잘 되게 합니다 */
-.name-input {
   background-color: #f8f9fa;
   font-weight: bold;
+  margin-bottom: 12px; /* ★ 종목명과 코드 사이 간격을 넓힘 */
 }
 
-/* ★ 버튼을 가로로 나란히 배치 */
+/* 코드 및 금액 입력창 */
+.ticker-input, .price-input {
+  font-size: 16px;
+  padding: 8px;
+  width: 90%;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* ★ 버튼 그룹: 확실하게 좌우(가로)로 배치 */
 .btn-group {
   display: flex;
-  flex-direction: row; /* 세로(column)에서 가로(row)로 변경 */
-  gap: 5px;
-  align-items: center;
+  flex-direction: row !important; 
+  gap: 6px;
+  align-items: stretch; /* 높이를 옆 칸들과 똑같이 맞춤 */
   height: 100%;
+  box-sizing: border-box;
 }
 
-/* 조회, 삭제 버튼 큼직하게 만들기 */
+/* ★ 조회와 삭제 버튼: 옆 칸의 높이에 꽉 차게 조절 */
 .refresh-btn, .delete-btn {
-  flex: 1; /* 가로 공간을 반반씩 나눠 가짐 */
-  min-height: 50px; /* 손가락으로 누르기 편하게 세로 높이 키움 */
-  font-size: 16px;
+  flex: 1;
+  height: 100%;
+  min-height: 45px;
+  font-size: 15px;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
   border: none;
   color: white;
+  box-sizing: border-box;
 }
 
 .refresh-btn {

@@ -6,7 +6,6 @@ function loadData() {
   if (savedData.length === 0) {
     addStockRow(); 
   } else {
-    // 저장된 종목명(name)도 함께 불러옵니다.
     savedData.forEach(data => addStockRow(data.name || '', data.ticker, data.price));
   }
 }
@@ -15,7 +14,7 @@ function saveData() {
   const rows = document.querySelectorAll('.stock-row');
   const dataToSave = [];
   rows.forEach(row => {
-    const name = row.querySelector('.name-input').value; // 사용자가 적은 종목명
+    const name = row.querySelector('.name-input').value;
     const ticker = row.querySelector('.ticker-input').value.replace(/[^0-9a-zA-Z.]/g, '');
     const basePrice = row.querySelector('.price-input').value;
     if (ticker && basePrice) {
@@ -25,14 +24,14 @@ function saveData() {
   localStorage.setItem('stockMemo', JSON.stringify(dataToSave));
 }
 
-// 종목명 입력칸(name-input)을 추가했습니다.
 function addStockRow(savedName = '', savedTicker = '', savedPrice = '') {
   const row = document.createElement('div');
   row.className = 'stock-row';
 
+  // 종목명 placeholder를 깔끔하게 '종목명'으로만 수정했습니다.
   row.innerHTML = `
     <div class="box">
-      <input type="text" class="name-input" placeholder="종목명 (예: 삼성전자)" value="${savedName}">
+      <input type="text" class="name-input" placeholder="종목명" value="${savedName}">
       <input type="text" class="ticker-input" placeholder="코드 (예: 005930)" value="${savedTicker}">
     </div>
     <div class="box">
@@ -55,7 +54,6 @@ function addStockRow(savedName = '', savedTicker = '', savedPrice = '') {
     saveData();
   });
 
-  // 타이핑할 때마다 바로바로 스마트폰에 자동 저장되게 안전장치 추가!
   row.querySelector('.name-input').addEventListener('input', saveData);
   row.querySelector('.ticker-input').addEventListener('input', saveData);
   row.querySelector('.price-input').addEventListener('input', saveData);
