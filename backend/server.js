@@ -25,6 +25,8 @@ app.get('/api/price/:ticker', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('백엔드 서버 실행 중: http://localhost:3000');
+// 인터넷 배포를 위해 포트 설정을 유연하게 변경합니다.
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`백엔드 서버 실행 중: 포트 ${PORT}`);
 });
