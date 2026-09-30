@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "yahoo-finance2": "^4.0.2"
   }
 }
