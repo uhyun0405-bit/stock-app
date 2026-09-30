@@ -43,24 +43,18 @@ async function fetchStockData(row) {
 
   currentPriceBox.innerText = '검색중...';
 
-  try {
-    // CORS 우회 공공 프록시를 통해 야후 파이낸스 데이터를 직접 안전하게 가져옵니다.
-    const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${fetchTicker}`;
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
+ try {
+    // Vercel 내부 서버리스 통로로 직접 요청합니다.
+    const response = await fetch(`/api/price?ticker=${fetchTicker}`);
+    if (!response.ok) throw new Error('API 오류');
     
-    const response = await fetch(proxyUrl);
-    if (!response.ok) throw new Error('통신 오류');
-    
-    const wrapper = await response.json();
-    const data = JSON.parse(wrapper.contents);
-    
-    const meta = data.chart.result[0].meta;
-    const currentPrice = meta.regularMarketPrice;
+    const data = await response.json();
+    const currentPrice = data.price;
 
     const diffPrice = currentPrice - basePrice;
     const percent = ((diffPrice / basePrice) * 100).toFixed(2);
 
-    nameLabel.innerText = fetchTicker;
+    nameLabel.innerText = data.name || fetchTicker;
     currentPriceBox.innerText = currentPrice.toLocaleString();
     
     const sign = diffPrice > 0 ? '+' : '';
@@ -72,7 +66,6 @@ async function fetchStockData(row) {
     currentPriceBox.innerText = '오류';
     alert('데이터를 불러오지 못했습니다. 종목 코드를 다시 확인해주세요.');
   }
-}
 
 addStockRow();
 addBtn.addEventListener('click', addStockRow);
